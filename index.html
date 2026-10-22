@@ -24,9 +24,9 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      user-select: none;	
+      -webkit-user-select: none;
+      user-select: none;
       -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
     }
 
     body {
@@ -216,6 +216,7 @@
       padding: 13px 32px;
       border-radius: 999px;
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, opacity 0.3s ease;
+      touch-action: manipulation;
     }
 
     .btn-yes {
@@ -278,6 +279,7 @@
       flex-direction: column;
       align-items: center;
       gap: 2px;
+      touch-action: manipulation;
     }
 
     .day-card:hover {
@@ -336,6 +338,7 @@
       color: var(--text-main);
       cursor: pointer;
       transition: all 0.2s ease;
+      touch-action: manipulation;
     }
 
     .time-pill:hover {
@@ -620,3 +623,295 @@
       <h1>Выбери день и час</h1>
       <p class="subtitle" style="margin-bottom: 12px;">
         Ближайшая неделя в твоём распоряжении. Я подстроюсь.
+      </p>
+
+      <div class="section-label">ДЕНЬ</div>
+      <div class="days-grid" id="days-grid"></div>
+
+      <div class="section-label">ВРЕМЯ</div>
+      <div class="time-sub-label">ДНЁМ</div>
+      <div class="time-grid" id="time-day">
+        <div class="time-pill" data-time="12:00">12:00</div>
+        <div class="time-pill" data-time="13:00">13:00</div>
+        <div class="time-pill" data-time="14:00">14:00</div>
+        <div class="time-pill" data-time="15:00">15:00</div>
+      </div>
+
+      <div class="time-sub-label">ВЕЧЕРОМ</div>
+      <div class="time-grid" id="time-evening">
+        <div class="time-pill" data-time="17:00">17:00</div>
+        <div class="time-pill" data-time="18:00">18:00</div>
+        <div class="time-pill" data-time="19:00">19:00</div>
+        <div class="time-pill" data-time="20:00">20:00</div>
+        <div class="time-pill" data-time="21:00">21:00</div>
+      </div>
+
+      <div class="status-script" id="status-script">Выбери удобный день...</div>
+
+      <button class="btn btn-yes btn-submit" id="btn-submit">Договорились ♡</button>
+    </div>
+
+    <!-- ЭКРАН 3: Анимация письма -->
+    <div class="screen" id="screen-3">
+      <div class="envelope-box" id="envelope-stage">
+        <svg class="envelope-svg" viewBox="0 0 140 100">
+          <rect x="5" y="10" width="130" height="80" rx="12" fill="#ffe5cc" stroke="#e6b89c" stroke-width="2"/>
+          <path d="M7 14 L70 58 L133 14" fill="#ffd4b0" stroke="#e6b89c" stroke-width="2"/>
+          <circle cx="70" cy="54" r="13" fill="#ff4d88"/>
+          <path d="M70 49 C67 45, 61 46, 62 52 C63 56, 70 60, 70 60 C70 60, 77 56, 78 52 C79 46, 73 45, 70 49 Z" fill="#ffffff"/>
+        </svg>
+      </div>
+
+      <div class="note-box" id="note-stage" style="display: none;">
+        <div class="note-tape"></div>
+        <div class="script-title" id="sending-text">Я передам Артёму, спасибо ♡</div>
+        <div class="eyebrow" style="margin-bottom: 0;">ПИСЬМО УЖЕ В ПУТИ</div>
+      </div>
+    </div>
+
+    <!-- ЭКРАН 4: Финал -->
+    <div class="screen" id="screen-4">
+      <div class="cat-wrapper">
+        <!-- Подмигивающий котик -->
+        <svg viewBox="0 0 200 200" width="100%" height="100%">
+          <polygon points="52,85 42,35 85,62" fill="#ffdfb3" />
+          <polygon points="55,78 48,44 78,63" fill="#ff9ebb" />
+          <polygon points="148,85 158,35 115,62" fill="#ffdfb3" />
+          <polygon points="145,78 152,44 122,63" fill="#ff9ebb" />
+          <ellipse cx="100" cy="145" rx="44" ry="38" fill="#ffdfb3" />
+          <circle cx="100" cy="95" r="46" fill="#ffe4be" />
+          <ellipse cx="68" cy="104" rx="9" ry="5" fill="#ff8da8" opacity="0.6" />
+          <ellipse cx="132" cy="104" rx="9" ry="5" fill="#ff8da8" opacity="0.6" />
+          <!-- Подмигивающий глазик -->
+          <path d="M70 92 Q78 84 86 92" stroke="#2b122e" stroke-width="3.5" fill="none" stroke-linecap="round" />
+          <!-- Открытый глазик -->
+          <circle cx="122" cy="92" r="6.5" fill="#2b122e" />
+          <circle cx="120" cy="89.5" r="2.2" fill="#ffffff" />
+          <!-- Поцелуйчик и сердечко -->
+          <circle cx="100" cy="106" r="5" fill="#ff5c8d" />
+          <path d="M122 102 C119 98, 113 99, 114 104 C115 108, 122 112, 122 112 C122 112, 129 108, 130 104 C131 99, 125 98, 122 102 Z" fill="#ff4d88" />
+        </svg>
+      </div>
+
+      <div class="eyebrow">ВСЁ, ДОГОВОРИЛИСЬ</div>
+      <div class="final-script">До встречи!</div>
+
+      <div class="chosen-badge" id="final-datetime">♡ среда, 23 сентября, в 14:00</div>
+
+      <p class="subtitle" style="margin-bottom: 12px;">
+        Буду ждать и немножко волноваться.<br>
+        <i>Надень то, в чём тебе хорошо — остальное я беру на себя.</i>
+      </p>
+
+      <div class="signature" id="final-signature">— Артём</div>
+    </div>
+  </div>
+
+  <script>
+    // ================= НАСТРОЙКИ =================
+    const SENDER_NAME = "Артём"; 
+    const SENDER_NAME_DATIVE = "Артёму"; 
+
+    const TELEGRAM_BOT_TOKEN = "7034046063:AAFNutDXRtqQoQ2bFPKij0qhvjX9ams_nuc"; 
+    const TELEGRAM_CHAT_ID = "5284863309";
+    // =============================================
+
+    document.getElementById('sending-text').textContent = `Я передам ${SENDER_NAME_DATIVE}, спасибо ♡`;
+    document.getElementById('final-signature').textContent = `— ${SENDER_NAME}`;
+
+    // Генерация фоновых сердечек
+    const bgContainer = document.getElementById('bg-particles');
+    for (let i = 0; i < 24; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'bg-heart';
+      heart.textContent = i % 3 === 0 ? '✦' : '♥';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (7 + Math.random() * 9) + 's';
+      heart.style.animationDelay = (-Math.random() * 10) + 's';
+      heart.style.fontSize = (10 + Math.random() * 12) + 'px';
+      bgContainer.appendChild(heart);
+    }
+
+    // Взрыв сердечек при клике
+    function spawnHeartBurst(x, y) {
+      const symbols = ['♥', '♡', '✨', '💖'];
+      for (let i = 0; i < 28; i++) {
+        const el = document.createElement('div');
+        el.className = 'burst-heart';
+        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.color = i % 2 === 0 ? '#ff6b9d' : '#ffc2d6';
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 60 + Math.random() * 170;
+        el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+        el.style.setProperty('--ty', Math.sin(angle) * dist - 40 + 'px');
+        el.style.setProperty('--rot', (Math.random() * 90 - 45) + 'deg');
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1100);
+      }
+    }
+
+    // Логика убегающей кнопки "Нет"
+    const btnNo = document.getElementById('btn-no');
+    const btnYes = document.getElementById('btn-yes');
+    const hintCaption = document.getElementById('hint-caption');
+    let noCount = 0;
+
+    const noStages = [
+      {
+        btnText: "Ну не-е-ет",
+        hint: "Кнопка оказалась пугливой.",
+        x: -75, y: 44, scale: 0.95, yesScale: 1.08
+      },
+      {
+        btnText: "Может, всё же да?",
+        hint: "Смотри, как старается убежать.",
+        x: -65, y: -85, scale: 0.88, yesScale: 1.15
+      },
+      {
+        btnText: "Ладно. Лови меня.",
+        hint: "Всё, она сдулась. Нажми — если сможешь.",
+        x: -45, y: -130, scale: 0.76, yesScale: 1.22
+      }
+    ];
+
+    function dodgeNoButton(e) {
+      e.preventDefault();
+      if (noCount < noStages.length) {
+        const stage = noStages[noCount];
+        btnNo.textContent = stage.btnText;
+        hintCaption.textContent = stage.hint;
+        btnNo.style.transform = `translate(${stage.x}px, ${stage.y}px) scale(${stage.scale})`;
+        btnYes.style.transform = `scale(${stage.yesScale})`;
+        noCount++;
+      } else {
+        btnNo.style.opacity = '0';
+        btnNo.style.pointerEvents = 'none';
+        btnNo.style.width = '0px';
+        btnNo.style.padding = '0';
+        btnNo.style.margin = '0';
+        btnNo.style.border = 'none';
+        hintCaption.textContent = "Ну вот. Кнопки «нет» больше нет.";
+        btnYes.style.transform = 'scale(1.25)';
+      }
+    }
+
+    btnNo.addEventListener('pointerenter', dodgeNoButton);
+    btnNo.addEventListener('pointerdown', dodgeNoButton);
+
+    // Переключение экранов
+    function showScreen(num, dotIndex) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(`screen-${num}`).classList.add('active');
+
+      const dots = document.querySelectorAll('.step-dot');
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === dotIndex));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    btnYes.addEventListener('pointerdown', (e) => {
+      const rect = btnYes.getBoundingClientRect();
+      spawnHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      setTimeout(() => showScreen(2, 1), 350);
+    });
+
+    // Генерация ближайших 7 дней
+    const daysGrid = document.getElementById('days-grid');
+    const shortWeekdays = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+    const fullWeekdays = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+    const shortMonths = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    const fullMonths = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+    let selectedDayText = null;
+    let selectedTimeText = null;
+
+    const today = new Date();
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+
+      const dayCard = document.createElement('div');
+      dayCard.className = 'day-card';
+      const labelTop = i === 1 ? 'ЗАВТРА' : shortWeekdays[d.getDay()];
+      const dayNumber = d.getDate();
+      const monthShort = shortMonths[d.getMonth()];
+      const fullFormatted = `${fullWeekdays[d.getDay()]}, ${dayNumber} ${fullMonths[d.getMonth()]}`;
+
+      dayCard.innerHTML = `
+        <span class="day-name">${labelTop}</span>
+        <span class="day-num">${dayNumber}</span>
+        <span class="day-month">${monthShort}</span>
+      `;
+
+      dayCard.addEventListener('pointerdown', () => {
+        document.querySelectorAll('.day-card').forEach(c => c.classList.remove('selected'));
+        dayCard.classList.add('selected');
+        selectedDayText = fullFormatted;
+        updateSelectionState();
+      });
+
+      daysGrid.appendChild(dayCard);
+    }
+
+    // Выбор времени
+    document.querySelectorAll('.time-pill').forEach(pill => {
+      pill.addEventListener('pointerdown', () => {
+        document.querySelectorAll('.time-pill').forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        selectedTimeText = pill.dataset.time;
+        updateSelectionState();
+      });
+    });
+
+    const statusScript = document.getElementById('status-script');
+    const btnSubmit = document.getElementById('btn-submit');
+
+    function updateSelectionState() {
+      if (selectedDayText && !selectedTimeText) {
+        statusScript.textContent = "Отлично. Теперь час.";
+      } else if (!selectedDayText && selectedTimeText) {
+        statusScript.textContent = "Супер. А в какой день?";
+      } else if (selectedDayText && selectedTimeText) {
+        statusScript.textContent = "Идеальное время ♡";
+        btnSubmit.classList.add('ready');
+      }
+    }
+
+    // Отправка и переход к финалу
+    btnSubmit.addEventListener('pointerdown', () => {
+      const rect = btnSubmit.getBoundingClientRect();
+      spawnHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+      const finalString = `♡ ${selectedDayText}, в ${selectedTimeText}`;
+      document.getElementById('final-datetime').textContent = finalString;
+
+      // Отправка в Telegram, если заполнены настройки
+      if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: `💌 Она сказала ДА!\nВыбранное время свидания: ${selectedDayText}, в ${selectedTimeText}`
+          })
+        }).catch(() => {});
+      }
+
+      setTimeout(() => {
+        showScreen(3, 2);
+        setTimeout(() => {
+          document.getElementById('envelope-stage').style.display = 'none';
+          document.getElementById('note-stage').style.display = 'block';
+        }, 1300);
+
+        setTimeout(() => {
+          const cardRect = document.getElementById('main-card').getBoundingClientRect();
+          spawnHeartBurst(cardRect.left + cardRect.width / 2, cardRect.top + cardRect.height / 2);
+          showScreen(4, 2);
+        }, 2900);
+      }, 300);
+    });
+  </script>
+</body>
+</html>
